@@ -1,0 +1,141 @@
+# ============================================================
+#  Bluestock MF Capstone — .gitignore
+#  Covers: Python, Jupyter Notebooks, VS Code, macOS
+# ============================================================
+
+# ---------------------------
+# Python
+# ---------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+parts/
+var/
+sdist/
+develop-eggs/
+.installed.cfg
+lib/
+lib64/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.manifest
+*.spec
+
+# Virtual environments
+venv/
+.venv/
+env/
+ENV/
+.env
+env.bak/
+venv.bak/
+
+# Environment variables & secrets
+.env
+.env.local
+.env.*.local
+secrets.ini
+config_local.py
+
+# ---------------------------
+# Jupyter Notebooks
+# ---------------------------
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/*
+profile_default/
+ipython_config.py
+*.ipynb_checkpoints
+
+# ---------------------------
+# VS Code
+# ---------------------------
+.vscode/
+*.code-workspace
+.history/
+
+# ---------------------------
+# Data files (large / sensitive)
+# ---------------------------
+data/raw/*.csv
+data/raw/*.xlsx
+data/raw/*.json
+data/raw/*.parquet
+data/processed/*.csv
+data/processed/*.xlsx
+data/processed/*.parquet
+data/db/*.db
+data/db/*.sqlite
+data/db/*.sqlite3
+
+# Allow placeholder .gitkeep files in data dirs
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/db/.gitkeep
+
+# ---------------------------
+# Reports & Outputs
+# ---------------------------
+reports/*.pdf
+reports/*.html
+reports/*.png
+reports/*.jpg
+
+# ---------------------------
+# Logs
+# ---------------------------
+*.log
+logs/
+*.out
+
+# ---------------------------
+# macOS
+# ---------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.TemporaryItems
+
+# ---------------------------
+# Testing & Coverage
+# ---------------------------
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+htmlcov/
+.pytest_cache/
+pytestdebug.log
+
+# ---------------------------
+# MyPy / Type Checkers
+# ---------------------------
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+
+# ---------------------------
+# Misc
+# ---------------------------
+*.bak
+*.swp
+*.tmp
+Thumbs.db
