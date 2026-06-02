@@ -73,6 +73,8 @@ data/processed/*.csv
 data/processed/*.xlsx
 data/processed/*.parquet
 data/db/*.db
+data/db/*.db-shm
+data/db/*.db-wal
 data/db/*.sqlite
 data/db/*.sqlite3
 
