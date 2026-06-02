@@ -84,9 +84,61 @@ bluestock_mf_capstone/
 
 ---
 
+## ⚙️ Setup Instructions
+
+### Step 1 — Create the Virtual Environment
+```bash
+python3 -m venv venv
+```
+
+### Step 2 — Activate the Virtual Environment
+```bash
+# macOS / Linux
+source venv/bin/activate
+
+# Windows
+venv\Scripts\activate
+```
+> You should see `(venv)` prefix in your terminal after activation.
+
+### Step 3 — Install All Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### Step 4 — Verify the Environment
+```bash
+python scripts/test_environment.py
+```
+Expected output: **9 passed | 0 failed** with all package versions listed.
+
+### Dependencies (requirements.txt)
+
+| Package      | Version | Purpose                          |
+|--------------|---------|----------------------------------|
+| pandas       | 2.3.3   | Data manipulation & analysis     |
+| numpy        | 2.0.2   | Numerical computing              |
+| matplotlib   | 3.9.4   | Static data visualization        |
+| seaborn      | 0.13.2  | Statistical data visualization   |
+| plotly       | 6.7.0   | Interactive charts & dashboards  |
+| sqlalchemy   | 2.0.50  | Database ORM & SQL toolkit       |
+| requests     | 2.32.5  | HTTP requests for data fetching  |
+| scipy        | 1.13.1  | Scientific computing & stats     |
+| jupyter      | 1.1.1   | Interactive notebook environment |
+
+---
+
 ## 📌 Status
 
-🚧 **In Progress** — Project structure initialized. Data collection and analysis pipeline coming soon.
+| Step | Task                                  | Status        |
+|------|---------------------------------------|---------------|
+| 1    | Project structure & Git init          | ✅ Complete   |
+| 2    | Python environment & dependencies     | ✅ Complete   |
+| 3    | Data collection & ingestion           | 🔜 Upcoming  |
+| 4    | SQL schema & data processing          | 🔜 Upcoming  |
+| 5    | Exploratory Data Analysis (EDA)       | 🔜 Upcoming  |
+| 6    | Dashboard development                 | 🔜 Upcoming  |
+| 7    | Final report                          | 🔜 Upcoming  |
 
 ---
 
