@@ -65,14 +65,34 @@ ipython_config.py
 # ---------------------------
 # Data files (large / sensitive)
 # ---------------------------
+# Raw source files — NOT committed (too large / source data)
 data/raw/*.csv
 data/raw/*.xlsx
 data/raw/*.json
 data/raw/*.parquet
-data/processed/*.csv
+
+# Processed deliverable CSVs — COMMITTED so admin can verify on GitHub
+# Only ignore large intermediates (clean_* aliases)
+data/processed/clean_nav.csv
+data/processed/clean_transactions.csv
+data/processed/clean_performance.csv
 data/processed/*.xlsx
 data/processed/*.parquet
-data/db/*.db
+# Allow the 10 numbered deliverable CSVs (01_–10_)
+!data/processed/01_fund_master.csv
+!data/processed/02_nav_history.csv
+!data/processed/03_aum_by_fund_house.csv
+!data/processed/04_monthly_sip_inflows.csv
+!data/processed/05_category_inflows.csv
+!data/processed/06_industry_folio_count.csv
+!data/processed/07_scheme_performance.csv
+!data/processed/08_investor_transactions.csv
+!data/processed/09_portfolio_holdings.csv
+!data/processed/10_benchmark_indices.csv
+
+# SQLite DB — committed as a deliverable (admin needs to see it)
+!data/db/bluestock_mf.db
+# WAL / SHM are transient lock files — still ignored
 data/db/*.db-shm
 data/db/*.db-wal
 data/db/*.sqlite
