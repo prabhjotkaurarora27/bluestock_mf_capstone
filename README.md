@@ -32,21 +32,27 @@ bluestock_mf_capstone/
 │   └── 01_data_ingestion.ipynb
 │
 ├── scripts/            # Python ETL scripts
-│   ├── run_pipeline.py         ← Master Day 2 runner
-│   ├── clean_nav.py            ← NAV history cleaner
-│   ├── clean_transactions.py   ← Investor transactions cleaner
-│   ├── clean_performance.py    ← Scheme performance cleaner
-│   ├── copy_remaining.py       ← Copy remaining CSVs to processed/
-│   └── load_database.py        ← Load all cleaned CSVs into SQLite
+│   ├── run_pipeline.py              ← Master Day 2 runner
+│   ├── clean_nav.py                 ← NAV history cleaner
+│   ├── clean_transactions.py        ← Investor transactions cleaner
+│   ├── clean_performance.py         ← Scheme performance cleaner
+│   ├── copy_remaining.py            ← Copy remaining CSVs to processed/
+│   ├── load_database.py             ← Load all cleaned CSVs into SQLite
+│   ├── performance_analytics.py     ← Sharpe, Alpha, Beta, CAGR calculations
+│   └── build_notebook.py            ← Programmatic notebook builder
 │
 ├── sql/
 │   ├── schema.sql      # Star schema: CREATE TABLE + FK + 8 indexes + 3 views
 │   └── queries.sql     # 13 analytical SQL queries
 │
 ├── reports/
-│   └── charts/         # 12 EDA + performance charts (PNG)
+│   ├── charts/         # 12 EDA + performance charts (PNG)
+│   ├── fund_scorecard.csv           ← Bluestock composite score per fund
+│   └── alpha_beta.csv               ← Alpha & Beta vs NIFTY 100
 │
-├── data_dictionary.md  # Column-level documentation for all 11 DB tables
+├── streamlit_dashboard.py   ← Day 5: Full 7-page interactive dashboard
+├── data_dictionary.md       # Column-level documentation for all 11 DB tables
+├── requirements.txt
 ├── .gitignore
 └── README.md
 ```
@@ -87,12 +93,18 @@ bluestock_mf_capstone/
    pip install -r requirements.txt
    ```
 
-4. **Run the full Day 2 pipeline** (clean + load DB in one command)
+4. **Run the dashboard** (Day 5)
+   ```bash
+   python3 -m streamlit run streamlit_dashboard.py
+   # Opens at http://localhost:8501
+   ```
+
+5. **Run the full Day 2 pipeline** (clean + load DB)
    ```bash
    python scripts/run_pipeline.py
    ```
 
-5. **Or run individual steps**
+6. **Or run individual steps**
    ```bash
    python scripts/clean_nav.py
    python scripts/clean_transactions.py
@@ -100,7 +112,7 @@ bluestock_mf_capstone/
    python scripts/load_database.py
    ```
 
-6. **Verify environment**
+7. **Verify environment**
    ```bash
    python scripts/test_environment.py   # 9 passed | 0 failed
    ```
@@ -155,6 +167,40 @@ bluestock_mf_capstone/
 
 ---
 
+---
+
+## 📊 Day 5 — Interactive Dashboard (`streamlit_dashboard.py`)
+
+A 7-page Streamlit web application built with Plotly for interactive data exploration.
+
+### Pages
+
+| Page | Features |
+|------|----------|
+| 🏠 **Dashboard Home** | Hero card, KPI stats (40 schemes, 32K+ txns), page guide, methodology, glossary, FAQ |
+| 🏭 **Industry Overview** | SIP AUM trend (dual-axis), AMC grouped bar chart, folio stacked area, YoY badges, CSV/Excel export |
+| 📊 **Fund Performance** | Risk-return scatter (bubble = AUM), scorecard table, NAV vs NIFTY 100 benchmark, fund comparison tool, drill-through |
+| 👥 **Investor Analytics** | State-wise bar chart, transaction type donut, SIP by age group, monthly volume trend, T30/B30 split, state drill-through |
+| 📈 **SIP & Market Trends** | SIP vs NIFTY 50 dual-axis, category heatmap, FY25 top categories, YoY growth chart, account growth |
+| 🎲 **Monte Carlo Simulation** | 10,000-path 5-year NAV projection, confidence bands (5th/25th/75th/95th), final value histogram, probability of target CAGR |
+| 🎯 **Portfolio Optimization** | Markowitz efficient frontier, max Sharpe portfolio, min volatility portfolio, custom weight sliders |
+
+### Key Features
+- **Cross-page slicers** — Fund House, Category, Plan filters sync all charts on their page
+- **Fund comparison tool** — Select 2 funds → side-by-side metrics with green/red highlights
+- **Drill-through** — Click a fund → 6-month NAV mini-chart + full metric breakdown
+- **CSV & Excel exports** — Download buttons on every data table
+- **White-text labels** — All chart axes, legends, tooltips readable on dark background
+- **Dark theme** — Navy `#0f1923` background with Bluestock blue `#2196F3` branding
+
+### Run
+```bash
+python3 -m streamlit run streamlit_dashboard.py
+# → http://localhost:8501
+```
+
+---
+
 ## 📌 Status
 
 | Day | Task                                         | Status       |
@@ -163,7 +209,7 @@ bluestock_mf_capstone/
 | 2   | Data cleaning + SQLite DB loaded             | ✅ Complete  |
 | 3   | Exploratory Data Analysis (EDA) — 15 charts  | ✅ Complete  |
 | 4   | Performance Analytics (Sharpe, Alpha, Beta)  | ✅ Complete  |
-| 5   | Dashboard development                        | 🔜 Upcoming |
+| 5   | Interactive Dashboard — 7 pages (Streamlit)  | ✅ Complete  |
 | 6   | Final report & presentation                  | 🔜 Upcoming |
 
 ---
