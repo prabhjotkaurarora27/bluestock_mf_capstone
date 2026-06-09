@@ -553,6 +553,8 @@ elif page == "📊 Fund Performance":
     sc_f = sc[mask].copy()
     sc_f["short_name"] = sc_f["scheme_name"].str.replace(r" - (Regular|Direct) (Plan )?- Growth","",regex=True).str[:35]
     sc_f["aum_plot"]   = sc_f["aum_crore"].fillna(500).clip(lower=100)
+    sharpe_min = float(sc_f["sharpe_ratio"].quantile(0.05))
+    sharpe_max = float(sc_f["sharpe_ratio"].quantile(0.95))
 
     # ── SCATTER ──
     st.markdown("<div class='section-header'>🎯 Risk-Return Scatter (Bubble = AUM | Color = Sharpe)</div>", unsafe_allow_html=True)
@@ -560,11 +562,12 @@ elif page == "📊 Fund Performance":
         size="aum_plot", color="sharpe_ratio", hover_name="short_name",
         hover_data={"fund_house":True,"cagr_3yr_pct":":.1f","sharpe_ratio":":.2f","aum_plot":":.0f"},
         color_continuous_scale=[[0,"#F44336"],[0.5,"#FF9800"],[1,"#4CAF50"]],
+        range_color=[sharpe_min, sharpe_max],
         size_max=40,
         labels={"cagr_3yr_pct":"3yr CAGR (%)","std_dev_ann_pct":"Std Dev Ann (%)","sharpe_ratio":"Sharpe","aum_plot":"AUM (₹ Cr)"})
     fig_sc.update_layout(**CHART_LAYOUT,
         title=dict(text="Risk vs Return — All Filtered Funds", font=dict(size=14,color="#90caf9")),
-        height=430, coloraxis_colorbar=dict(title="Sharpe",tickfont=dict(color=WHITE,size=11)))
+        height=430, coloraxis_colorbar=dict(title="Sharpe Ratio",tickfont=dict(color=WHITE,size=11),title_font=dict(color=TEXT_L,size=11)))
     fig_sc.update_traces(marker=dict(line=dict(width=1,color="#071320")))
     fig_sc.update_xaxes(tickfont=dict(color=WHITE,size=12), title_font=dict(color=TEXT_L))
     fig_sc.update_yaxes(tickfont=dict(color=WHITE,size=12), title_font=dict(color=TEXT_L))
