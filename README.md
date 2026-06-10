@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 Project Overview
+## Project Overview
 
 The **Bluestock MF Analytics Platform** covers the complete data lifecycle for 40 SEBI-registered mutual fund schemes across 10 AMCs — from raw data ingestion and SQL-based star-schema modelling to exploratory analysis, financial performance metrics, and an interactive web dashboard.
 
@@ -12,10 +12,14 @@ The **Bluestock MF Analytics Platform** covers the complete data lifecycle for 4
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 bluestock_mf_capstone/
+│
+├── dashboard/                      # ★ Day 5 — Interactive Streamlit Dashboard
+│   ├── app.py                      #   Entry-point shim (delegates to root dashboard)
+│   └── README.md                   #   Day 5 folder docs & run instructions
 │
 ├── data/
 │   ├── raw/                        # Original source files (not committed)
@@ -73,7 +77,7 @@ bluestock_mf_capstone/
 │       ├── benchmark_comparison.png
 │       └── fund_scorecard_top15.png
 │
-├── streamlit_dashboard.py          # Day 5: 7-page interactive dashboard (1,300 lines)
+├── streamlit_dashboard.py          # Day 5: 7-page interactive dashboard (1,300+ lines)
 ├── data_dictionary.md              # Column-level docs for all 11 DB tables
 ├── requirements.txt                # All Python dependencies (pinned)
 ├── .gitignore
@@ -82,7 +86,7 @@ bluestock_mf_capstone/
 
 ---
 
-## 🛠️ Tech Stack
+##  Tech Stack
 
 | Layer | Tools |
 |-------|-------|
@@ -97,7 +101,7 @@ bluestock_mf_capstone/
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1. Clone the repository
 ```bash
@@ -117,7 +121,7 @@ venv\Scripts\activate             # Windows
 pip install -r requirements.txt
 ```
 
-### 4. Run the interactive dashboard ⭐
+### 4. Run the interactive dashboard 
 ```bash
 python3 -m streamlit run streamlit_dashboard.py
 # Opens at → http://localhost:8501
@@ -137,7 +141,7 @@ python scripts/test_environment.py
 
 ---
 
-## 📊 Day 5 — Interactive Dashboard
+##  Day 5 — Interactive Dashboard
 
 A 7-page Streamlit web app with Plotly charts, cross-page slicers, fund comparison, drill-through, CSV/Excel exports, Monte Carlo simulation, and Markowitz portfolio optimisation.
 
@@ -165,7 +169,7 @@ A 7-page Streamlit web app with Plotly charts, cross-page slicers, fund comparis
 
 ---
 
-## 🗄️ Database Schema — Star Schema (`bluestock_mf.db`)
+## Database Schema — Star Schema (`bluestock_mf.db`)
 
 **Size:** ~12.9 MB · **Rows:** 107,461 · **Tables:** 11 · **Views:** 3 · **Indexes:** 8
 
@@ -185,7 +189,7 @@ A 7-page Streamlit web app with Plotly charts, cross-page slicers, fund comparis
 
 ---
 
-## 📈 Day 4 — Performance Analytics
+##  Day 4 — Performance Analytics
 
 Computed via `scripts/performance_analytics.py` and exported to `reports/`:
 
@@ -200,7 +204,7 @@ Computed via `scripts/performance_analytics.py` and exported to `reports/`:
 
 ---
 
-## 🔍 Day 3 — Exploratory Data Analysis (15 charts)
+##  Day 3 — Exploratory Data Analysis (15 charts)
 
 All charts exported to `reports/charts/`:
 
@@ -221,7 +225,7 @@ All charts exported to `reports/charts/`:
 
 ---
 
-## 📦 Dependencies (`requirements.txt`)
+##  Dependencies (`requirements.txt`)
 
 ```
 jupyter==1.1.1
@@ -239,7 +243,7 @@ streamlit==1.50.0
 
 ---
 
-## 📌 Project Status
+##  Project Status
 
 | Day | Deliverable | Status |
 |-----|-------------|--------|
@@ -252,7 +256,8 @@ streamlit==1.50.0
 
 ---
 
-## 👤 Author
+## 
+ Author
 
 **Prabhjot Kaur**
 Bluestock Fintech · Data Analytics Internship · © 2026
