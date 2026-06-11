@@ -110,6 +110,8 @@ reports/*.pdf
 reports/*.html
 reports/*.png
 reports/*.jpg
+# Allow Day 6 output chart
+!reports/rolling_sharpe_chart.png
 
 # ---------------------------
 # Logs
