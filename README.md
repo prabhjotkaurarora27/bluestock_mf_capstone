@@ -24,24 +24,21 @@ bluestock_mf_capstone/
 ├── data/
 │   ├── raw/                        # Original source files (not committed)
 │   ├── processed/                  # 13 cleaned CSVs — committed to repo
-│   │   ├── 01_fund_master.csv          (40 schemes)
+│   │   ├── 01_fund_master.csv
 │   │   ├── 02_nav_history.csv          (64,320 daily NAV records)
-│   │   ├── 03_aum_by_fund_house.csv    (quarterly AUM by AMC)
-│   │   ├── 04_monthly_sip_inflows.csv  (monthly SIP stats)
-│   │   ├── 05_category_inflows.csv     (category-wise net inflows)
-│   │   ├── 06_industry_folio_count.csv (folio count by category)
-│   │   ├── 07_scheme_performance.csv   (1yr/3yr/5yr returns)
-│   │   ├── 08_investor_transactions.csv(32,778 investor records)
-│   │   ├── 09_portfolio_holdings.csv   (sector holdings)
-│   │   ├── 10_benchmark_indices.csv    (NIFTY 50/100 daily)
-│   │   ├── clean_nav.csv               (filtered NAV for dashboard)
-│   │   ├── clean_performance.csv       (cleaned performance metrics)
-│   │   └── clean_transactions.csv      (cleaned transactions)
+│   │   ├── 03_aum_by_fund_house.csv
+│   │   ├── 04_monthly_sip_inflows.csv
+│   │   ├── 05_category_inflows.csv
+│   │   ├── 06_industry_folio_count.csv
+│   │   ├── 07_scheme_performance.csv
+│   │   ├── 08_investor_transactions.csv (32,778 records)
+│   │   ├── 09_portfolio_holdings.csv
+│   │   └── 10_benchmark_indices.csv    (NIFTY 50/100 daily)
 │   └── db/
 │       └── bluestock_mf.db             (SQLite star schema, ~12.9 MB)
 │
 ├── notebooks/
-│   └── 01_data_ingestion.ipynb     # Data ingestion walkthrough
+│   └── 01_data_ingestion.ipynb     # Day 1: data ingestion walkthrough
 │
 ├── scripts/
 │   ├── data_ingestion.py           # Raw data loader
@@ -52,8 +49,10 @@ bluestock_mf_capstone/
 │   ├── copy_remaining.py           # Copy CSVs to processed/
 │   ├── load_database.py            # Load all CSVs into SQLite
 │   ├── run_pipeline.py             # Master runner (all Day 2 steps)
-│   ├── performance_analytics.py    # Sharpe, Alpha, Beta, CAGR, Drawdown
-│   ├── build_notebook.py           # Programmatic notebook builder
+│   ├── performance_analytics.py    # Day 4: Sharpe, Alpha, Beta, CAGR, Drawdown
+│   ├── build_notebook.py           # Day 4: programmatic notebook builder
+│   ├── recommender.py              # Day 6: risk-based fund recommender
+│   ├── build_day6_notebook.py      # Day 6: programmatic notebook builder
 │   └── test_environment.py         # Dependency validation (9 checks)
 │
 ├── sql/
@@ -61,22 +60,17 @@ bluestock_mf_capstone/
 │   └── queries.sql                 # 13 analytical SQL queries
 │
 ├── reports/
-│   ├── fund_scorecard.csv          # Bluestock composite score for 40 funds
-│   ├── alpha_beta.csv              # Alpha & Beta vs NIFTY 100
-│   └── charts/                    # 15 exported PNG charts
-│       ├── 01_nav_trends.png
-│       ├── 02_aum_growth.png
-│       ├── 03_sip_inflow_trend.png
-│       ├── 04_category_heatmap.png
-│       ├── 05_06_07_demographics.png
-│       ├── 08_09_geo_distribution.png
-│       ├── 10_folio_growth.png
-│       ├── 11_correlation_matrix.png
-│       ├── 12_sector_allocation.png
-│       ├── 13_14_15_performance.png
-│       ├── benchmark_comparison.png
-│       └── fund_scorecard_top15.png
+│   ├── fund_scorecard.csv          # Day 4: Bluestock composite score (40 funds)
+│   ├── alpha_beta.csv              # Day 4: Alpha & Beta vs NIFTY 100
+│   ├── var_cvar_report.csv         # Day 6: 95% VaR & CVaR for all 40 funds
+│   ├── hhi_concentration_report.csv# Day 6: Sector HHI concentration scores
+│   ├── rolling_sharpe_chart.png    # Day 6: 5-fund rolling Sharpe line chart
+│   ├── Bluestock_MF_Analytics_Slides.pdf
+│   └── charts/                     # 13 Day 3 EDA chart PNGs
 │
+├── 03_eda_analysis.ipynb           # Day 3: EDA notebook (15 charts)
+├── 04_performance_analytics.ipynb  # Day 4: Performance analytics notebook
+├── Advanced_Analytics.ipynb        # Day 6: Advanced analytics (7 tasks)
 ├── streamlit_dashboard.py          # Day 5: 7-page interactive dashboard (1,300+ lines)
 ├── data_dictionary.md              # Column-level docs for all 11 DB tables
 ├── requirements.txt                # All Python dependencies (pinned)
@@ -230,6 +224,7 @@ All charts exported to `reports/charts/`:
 ```
 jupyter==1.1.1
 matplotlib==3.9.4
+nbformat==5.10.4
 numpy==2.0.2
 openpyxl==3.1.5
 pandas==2.3.3
@@ -243,6 +238,22 @@ streamlit==1.50.0
 
 ---
 
+## 🔬 Day 6 — Advanced Analytics & Investor Insights
+
+7-task deep-dive analysis in `Advanced_Analytics.ipynb`.
+
+| Task | Analysis | Output |
+|------|----------|--------|
+| 1 | **VaR & CVaR** — 95% Value at Risk + Conditional VaR for all 40 funds | `var_cvar_report.csv` |
+| 2 | **Rolling 90-Day Sharpe** — time-varying risk-adjusted return (5 funds) | `rolling_sharpe_chart.png` |
+| 3 | **Investor Cohort Analysis** — 2022–2025 cohorts: size, SIP %, retention | Markdown table |
+| 4 | **SIP Continuity** — gap analysis, at-risk churn detection, top-20 table | Histogram + table |
+| 5 | **Fund Recommender** — `recommend_funds("Low"|"Moderate"|"High")` → top 3 | `scripts/recommender.py` |
+| 6 | **Sector HHI Concentration** — Herfindahl index per fund, scatter + bar | `hhi_concentration_report.csv` |
+| 7 | **5 Advanced Insights** — evidence-based markdown findings | Notebook section |
+
+---
+
 ##  Project Status
 
 | Day | Deliverable | Status |
@@ -252,7 +263,7 @@ streamlit==1.50.0
 | **Day 3** | Exploratory Data Analysis — 15 charts exported | ✅ Complete |
 | **Day 4** | Performance Analytics — Sharpe, Alpha, Beta, CAGR, Scorecard | ✅ Complete |
 | **Day 5** | Interactive Dashboard — 7 pages (Streamlit + Plotly) | ✅ Complete |
-| **Day 6** | Final report & presentation | 🔜 Upcoming |
+| **Day 6** | Advanced Analytics — VaR, Rolling Sharpe, Cohort, Recommender, HHI | ✅ Complete |
 
 ---
 
