@@ -112,6 +112,9 @@ reports/*.png
 reports/*.jpg
 # Allow Day 6 output chart
 !reports/rolling_sharpe_chart.png
+# Allow final submission documents
+!reports/Final_Report.pdf
+!reports/Bluestock_MF_Analytics_Slides.pdf
 
 # ---------------------------
 # Logs
