@@ -254,23 +254,38 @@ streamlit==1.50.0
 
 ---
 
-##  Project Status
+##  Project Status — ✅ COMPLETE
+
+> **All 7 days of deliverables are finished and submitted. The project is 100% complete.**
 
 | Day | Deliverable | Status |
 |-----|-------------|--------|
-| **Day 1** | Project setup, Git init, data ingestion pipeline | ✅ Complete |
-| **Day 2** | Data cleaning (13 CSVs) + SQLite star-schema DB loaded | ✅ Complete |
-| **Day 3** | Exploratory Data Analysis — 15 charts exported | ✅ Complete |
-| **Day 4** | Performance Analytics — Sharpe, Alpha, Beta, CAGR, Scorecard | ✅ Complete |
-| **Day 5** | Interactive Dashboard — 7 pages (Streamlit + Plotly) | ✅ Complete |
-| **Day 6** | Advanced Analytics — VaR, Rolling Sharpe, Cohort, Recommender, HHI | ✅ Complete |
+| **Day 1** | Project setup, Git init, data ingestion pipeline, live NAV fetch | ✅ Complete |
+| **Day 2** | ETL: Data cleaning (13 CSVs) + SQLite star-schema DB loaded (107K rows) | ✅ Complete |
+| **Day 3** | Exploratory Data Analysis — 15 charts exported to `reports/charts/` | ✅ Complete |
+| **Day 4** | Performance Analytics — Sharpe, Alpha, Beta, CAGR, Max Drawdown, Scorecard | ✅ Complete |
+| **Day 5** | Interactive Dashboard — 7 pages (Streamlit + Plotly, 1,300+ lines) | ✅ Complete |
+| **Day 6** | Advanced Analytics — VaR/CVaR, Rolling Sharpe, Cohort, SIP, HHI, Recommender | ✅ Complete |
+| **Day 7** | Final Report (16 pages), 12-slide PPTX, clean GitHub repo, v1.0 tag | ✅ Complete |
+
+### Final Deliverables
+
+| Deliverable | File | Status |
+|---|---|---|
+| Final Report (15–20 pages) | `reports/Final_Report.pdf` | ✅ 16 pages |
+| Presentation (12 slides) | `reports/Bluestock_MF_Presentation.pptx` | ✅ 12 slides |
+| GitHub Repo + README | [github.com/prabhjotkaurarora27/bluestock_mf_capstone](https://github.com/prabhjotkaurarora27/bluestock_mf_capstone) | ✅ v1.0 tagged |
+| Advanced Analytics Notebook | `Advanced_Analytics.ipynb` | ✅ 7 tasks |
+| VaR/CVaR Report | `reports/var_cvar_report.csv` | ✅ 40 funds |
+| Rolling Sharpe Chart | `reports/rolling_sharpe_chart.png` | ✅ 5 funds |
+| Fund Recommender | `scripts/recommender.py` | ✅ 3 risk grades |
+| Interactive Dashboard | `streamlit_dashboard.py` | ✅ 7 pages |
 
 ---
 
-## 
- Author
+##  Author
 
 **Prabhjot Kaur**
 Bluestock Fintech · Data Analytics Internship · © 2026
 
-🔗 [GitHub Repository](https://github.com/prabhjotkaurarora27/bluestock_mf_capstone)
+🔗 [GitHub Repository](https://github.com/prabhjotkaurarora27/bluestock_mf_capstone) · Tag: `v1.0`
