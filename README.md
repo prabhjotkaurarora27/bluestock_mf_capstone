@@ -38,21 +38,28 @@ bluestock_mf_capstone/
 │       └── bluestock_mf.db             (SQLite star schema, ~12.9 MB)
 │
 ├── notebooks/
-│   └── 01_data_ingestion.ipynb     # Day 1: data ingestion walkthrough
+│   ├── 01_data_ingestion.ipynb     # Day 1: data ingestion walkthrough
+│   ├── 02_data_cleaning.ipynb      # Day 2: cleaning steps (NAV, txn, perf)
+│   ├── 03_eda_analysis.ipynb       # Day 3: EDA — 15 charts & 10 findings
+│   ├── 04_performance_analytics.ipynb  # Day 4: CAGR, Sharpe, Alpha, Beta, Drawdown
+│   └── 05_advanced_analytics.ipynb     # Day 6: VaR, Cohort, SIP, HHI, Recommender
 │
 ├── scripts/
+│   ├── etl_pipeline.py             # ★ D1 — Master ETL orchestrator (7 stages)
+│   ├── compute_metrics.py          # ★ D4 — Performance metrics entry point
 │   ├── data_ingestion.py           # Raw data loader
-│   ├── live_nav_fetch.py           # Live NAV fetcher (AMFI API)
-│   ├── clean_nav.py                # NAV history cleaner
+│   ├── live_nav_fetch.py           # Live NAV fetcher (AMFI API / mfapi.in)
+│   ├── clean_nav.py                # NAV history cleaner (ffill, dedup, validate)
 │   ├── clean_transactions.py       # Investor transactions cleaner
 │   ├── clean_performance.py        # Scheme performance cleaner
 │   ├── copy_remaining.py           # Copy CSVs to processed/
-│   ├── load_database.py            # Load all CSVs into SQLite
-│   ├── run_pipeline.py             # Master runner (all Day 2 steps)
+│   ├── load_database.py            # Load all CSVs into SQLite star schema
+│   ├── run_pipeline.py             # Legacy runner (Days 1–2 steps)
 │   ├── performance_analytics.py    # Day 4: Sharpe, Alpha, Beta, CAGR, Drawdown
-│   ├── build_notebook.py           # Day 4: programmatic notebook builder
 │   ├── recommender.py              # Day 6: risk-based fund recommender
-│   ├── build_day6_notebook.py      # Day 6: programmatic notebook builder
+│   ├── build_notebook.py           # Programmatic notebook builder (Day 4)
+│   ├── build_day6_notebook.py      # Programmatic notebook builder (Day 6)
+│   ├── generate_report.py          # Day 7: Final_Report.pdf generator
 │   └── test_environment.py         # Dependency validation (9 checks)
 │
 ├── sql/
@@ -68,9 +75,6 @@ bluestock_mf_capstone/
 │   ├── Bluestock_MF_Analytics_Slides.pdf
 │   └── charts/                     # 13 Day 3 EDA chart PNGs
 │
-├── 03_eda_analysis.ipynb           # Day 3: EDA notebook (15 charts)
-├── 04_performance_analytics.ipynb  # Day 4: Performance analytics notebook
-├── Advanced_Analytics.ipynb        # Day 6: Advanced analytics (7 tasks)
 ├── streamlit_dashboard.py          # Day 5: 7-page interactive dashboard (1,300+ lines)
 ├── data_dictionary.md              # Column-level docs for all 11 DB tables
 ├── requirements.txt                # All Python dependencies (pinned)
@@ -121,10 +125,12 @@ python3 -m streamlit run streamlit_dashboard.py
 # Opens at → http://localhost:8501
 ```
 
-### 5. Run the full ETL pipeline (Day 2)
+### 5. Run the full ETL pipeline (D1 deliverable)
 ```bash
-python scripts/run_pipeline.py
-# Cleans all CSVs → loads bluestock_mf.db
+python scripts/etl_pipeline.py
+# Runs all 7 stages: ingest → clean → load DB → compute metrics
+# Add --skip-metrics to stop after DB load
+# Add --skip-db to run cleaning only
 ```
 
 ### 6. Verify environment
@@ -275,11 +281,13 @@ streamlit==1.50.0
 | Final Report (15–20 pages) | `reports/Final_Report.pdf` | ✅ 16 pages |
 | Presentation (12 slides) | `reports/Bluestock_MF_Presentation.pptx` | ✅ 12 slides |
 | GitHub Repo + README | [github.com/prabhjotkaurarora27/bluestock_mf_capstone](https://github.com/prabhjotkaurarora27/bluestock_mf_capstone) | ✅ v1.0 tagged |
-| Advanced Analytics Notebook | `Advanced_Analytics.ipynb` | ✅ 7 tasks |
+| Advanced Analytics Notebook | `notebooks/05_advanced_analytics.ipynb` | ✅ 7 tasks |
 | VaR/CVaR Report | `reports/var_cvar_report.csv` | ✅ 40 funds |
 | Rolling Sharpe Chart | `reports/rolling_sharpe_chart.png` | ✅ 5 funds |
 | Fund Recommender | `scripts/recommender.py` | ✅ 3 risk grades |
-| Interactive Dashboard | `streamlit_dashboard.py` | ✅ 7 pages |
+| ETL Pipeline | `scripts/etl_pipeline.py` | ✅ 7 stages |
+| Performance Metrics | `scripts/compute_metrics.py` | ✅ Sharpe/Alpha/Beta/VaR |
+| Interactive Dashboard | `streamlit_dashboard.py` + `dashboard/app.py` | ✅ 7 pages |
 
 ---
 
